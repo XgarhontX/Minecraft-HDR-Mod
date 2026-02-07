@@ -1,0 +1,75 @@
+# Gradle
+.gradle/
+build/
+out/
+bin/
+!gradle/wrapper/gradle-wrapper.jar
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Minecraft run directories
+run/
+fabric/run/
+neoforge/run/
+!fabric/run/config/
+!neoforge/run/config/
+!fabric/run/config/*
+!neoforge/run/config/*
+fabric/run/*.txt
+fabric/run/*.json
+fabric/run/.architectury-transformer/
+neoforge/run/.architectury-transformer/
+fabric/run/crash-reports/
+fabric/run/data/
+fabric/run/downloads/
+fabric/run/logs/
+fabric/run/mods/
+fabric/run/resourcepacks/
+fabric/run/resources/
+fabric/run/saves/
+neoforge/run/crash-reports/
+neoforge/run/data/
+neoforge/run/downloads/
+neoforge/run/logs/
+neoforge/run/mods/
+neoforge/run/resourcepacks/
+neoforge/run/resources/
+neoforge/run/saves/
+
+# Generated sources
+generated/
+
+# Loom cache
+.gradle/loom-cache/
+
+# Local libraries (platform-specific)
+libglfw.so.3.5
+*.dll
+*.dylib
+
+# Temp files
+*.log
+*.log.*
+
+# Environment files
+.env
+*.env.local
+
+# Backup files
+*.bak
+*.backup
+
+# Profiling data
+*.hprof
