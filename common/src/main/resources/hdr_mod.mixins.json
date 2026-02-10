@@ -6,7 +6,6 @@
   "client": [
     "MixinGlDevice",
     "MixinRenderSystem",
-    "MixinRenderTarget",
     "MixinWindow"
   ],
   "mixins": [
