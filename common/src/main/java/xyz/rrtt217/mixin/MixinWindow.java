@@ -51,8 +51,9 @@ import xyz.rrtt217.config.HDRModConfig;
         {
             HDRMod.WindowPrimaries = Enums.Primaries.fromId(GLFWColorManagement.glfwGetWindowPrimaries(this.handle()));
             HDRMod.WindowTransferFunction = Enums.TransferFunction.fromId(GLFWColorManagement.glfwGetWindowTransfer(this.handle()));
-            HDRMod.LOGGER.info("Get window with {} nit SDR white level, {} nit max luminance, {} nit min luminance, {} Primaries, {} Transfer function ",
-                GLFWColorManagement.glfwGetWindowSdrWhiteLevel(this.handle()), GLFWColorManagement.glfwGetWindowMaxLuminance(this.handle()) ,GLFWColorManagement.glfwGetWindowMinLuminance(this.handle()),HDRMod.WindowPrimaries,HDRMod.WindowTransferFunction
+            HDRMod.LOGGER.info("Get {} bit buffer window with {} nit SDR white level, {} nit max luminance, {} nit min luminance, {} Primaries, {} Transfer function ",
+                GLFW.glfwGetWindowAttrib(this.handle(),GLFW.GLFW_RED_BITS), GLFWColorManagement.glfwGetWindowSdrWhiteLevel(this.handle()), GLFWColorManagement.glfwGetWindowMaxLuminance(this.handle()) ,GLFWColorManagement.glfwGetWindowMinLuminance(this.handle()),HDRMod.WindowPrimaries,HDRMod.WindowTransferFunction
             );
+            HDRMod.LOGGER.info("SDR white level and luminances logged here may not be accurate at this time for Linux users.");
         }
     }
