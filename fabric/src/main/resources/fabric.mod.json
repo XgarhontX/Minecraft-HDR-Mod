@@ -3,13 +3,12 @@
   "id": "hdr_mod",
   "version": "${version}",
   "name": "HDR Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "description": "Enable native HDR in Minecraft with Iris shaders.",
   "authors": [
     "Me!"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "sources": "https://github.com/rrtt217/Minecraft-HDR-Mod"
   },
   "license": "CC0-1.0",
   "icon": "assets/hdr_mod/icon.png",
@@ -32,7 +31,8 @@
     "fabricloader": ">=0.18.2",
     "minecraft": ">=1.21.11",
     "java": ">=21",
-    "fabric-api": "*"
+    "fabric-api": "*",
+    "cloth-config":"*"
   },
   "suggests": {
     "iris": "*"

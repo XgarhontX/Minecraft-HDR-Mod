@@ -1,0 +1,13 @@
+{
+  "text.autoconfig.hdr_mod.option.enableHDR": "Enable HDR (Restart your game after toggle)",
+  "text.autoconfig.hdr_mod.option.overrideSDRWhiteLevel": "Override auto-get SDR white level",
+  "text.autoconfig.hdr_mod.option.SDRWhiteLevel": "SDR white level",
+  "text.autoconfig.hdr_mod.option.overrideMinLuminance": "Override auto-get min luminance",
+  "text.autoconfig.hdr_mod.option.MinLuminance": "Minimum luminance",
+  "text.autoconfig.hdr_mod.option.overrideMaxLuminance": "Override auto-get max luminance",
+  "text.autoconfig.hdr_mod.option.MaxLuminance": "Maximim luminance",
+  "text.autoconfig.hdr_mod.option.overridePrimaries": "Override auto-get primaries/colorspace",
+  "text.autoconfig.hdr_mod.option.primaries": "Primaries",
+  "text.autoconfig.hdr_mod.option.overrideTransferFunction": "Override auto-get transfer function",
+  "text.autoconfig.hdr_mod.option.transferFunction": "Transfer function"
+}
