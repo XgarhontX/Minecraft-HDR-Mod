@@ -35,7 +35,7 @@ import xyz.rrtt217.config.HDRModConfig;
         private void hdr_mod$16BitWindowHint(WindowEventHandler arg, ScreenManager arg2, DisplayData arg3, String string, String string2, CallbackInfo ci) {
             int platform = GLFW.glfwGetPlatform();
             HDRModConfig config = AutoConfig.getConfigHolder(HDRModConfig.class).getConfig();
-            if(platform != GLFW.GLFW_PLATFORM_X11 && config.enableHDR) {
+            if(platform != GLFW.GLFW_PLATFORM_X11 && config.enableHDR && HDRMod.hasglfwLib) {
                 // For 16 bits per channal.
                 GLFW.glfwWindowHint(GLFW.GLFW_RED_BITS, 16);
                 GLFW.glfwWindowHint(GLFW.GLFW_GREEN_BITS, 16);

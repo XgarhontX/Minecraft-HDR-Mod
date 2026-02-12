@@ -21,6 +21,8 @@ public final class HDRMod {
     public static Primaries WindowPrimaries = Primaries.SRGB;
     public static TransferFunction WindowTransferFunction = TransferFunction.SRGB;
 
+    // Whether we have the glfw lib for the platform.
+    public static boolean hasglfwLib = false;
     public HDRMod() {
     }
 
@@ -41,6 +43,7 @@ public final class HDRMod {
         }
         if(loaded) {
             Configuration.GLFW_LIBRARY_NAME.set(glfwLibPath);
+            hasglfwLib = true;
         }
         LOGGER.info("HDRMod Initialized!");
     }
