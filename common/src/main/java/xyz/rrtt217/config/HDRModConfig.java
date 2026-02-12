@@ -2,7 +2,7 @@ package xyz.rrtt217.config;
 
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
-import xyz.rrtt217.Enums.*;
+import xyz.rrtt217.util.Enums.*;
 
 @Config(name = "hdr_mod")
 public class HDRModConfig implements ConfigData {

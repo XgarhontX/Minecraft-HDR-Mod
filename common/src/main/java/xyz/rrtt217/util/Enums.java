@@ -1,4 +1,4 @@
-package xyz.rrtt217;
+package xyz.rrtt217.util;
 
 public class Enums {
     // These enums are the same as Wayland color-management-v1 protocol.

@@ -1,12 +1,6 @@
 package xyz.rrtt217.fabric.client;
 
 import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import net.minecraft.client.Minecraft;
-import xyz.rrtt217.GLFWColorManagement;
-import xyz.rrtt217.HDRMod;
-
-import static xyz.rrtt217.HDRMod.LOGGER;
 
 public final class HDRModFabricClient implements ClientModInitializer {
     @Override

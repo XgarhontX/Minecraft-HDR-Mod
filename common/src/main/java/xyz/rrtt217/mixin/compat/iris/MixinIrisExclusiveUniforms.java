@@ -10,8 +10,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import xyz.rrtt217.GLFWColorManagement;
-import xyz.rrtt217.HDRMod;
+import xyz.rrtt217.util.GLFWColorManagement;
 import xyz.rrtt217.config.HDRModConfig;
 
 @Mixin(IrisExclusiveUniforms.class)

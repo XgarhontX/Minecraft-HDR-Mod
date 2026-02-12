@@ -1,4 +1,4 @@
-package xyz.rrtt217;
+package xyz.rrtt217.util;
 
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.system.*;
