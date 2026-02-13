@@ -1,5 +1,6 @@
 package xyz.rrtt217.util;
 
+import dev.architectury.platform.Platform;
 import net.minecraft.client.Minecraft;
 
 import java.io.FileNotFoundException;
@@ -11,7 +12,7 @@ import java.util.HashMap;
 
 public class LibraryExtractor {
     public static Path extractLibraries(HashMap<String,String> platformLibNameMap, String targetDir) throws IOException, FileNotFoundException {
-        Path gamedir = Minecraft.getInstance().gameDirectory.toPath();
+        Path gamedir = Platform.getGameFolder();
         Path libExtractDir = gamedir.resolve(targetDir);
         Files.createDirectories(libExtractDir);
         String osName = System.getProperty("os.name").toLowerCase();

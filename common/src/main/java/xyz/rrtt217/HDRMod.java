@@ -41,7 +41,8 @@ public final class HDRMod {
             glfwLibPath = LibraryExtractor.extractLibraries(glfwLibNames,"glfw").toString();
             loaded = true;
         }
-        catch (Exception ignored) {
+        catch (Exception e) {
+            LOGGER.warn("Unable to load libraries from glfw:{}",e.getMessage());
         }
         if(loaded) {
             Configuration.GLFW_LIBRARY_NAME.set(glfwLibPath);

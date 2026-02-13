@@ -1,7 +1,7 @@
 modLoader = "javafml"
 loaderVersion = "[10,)"
 #issueTrackerURL = ""
-license = "Insert License Here"
+license = "MIT"
 
 [[mods]]
 modId = "hdr_mod"
@@ -9,7 +9,7 @@ version = "${version}"
 displayName = "HDR Mod"
 authors = "Me!"
 description = '''
-This is an example description! Tell everyone what your mod is about!
+Enable native HDR in Minecraft with Iris shaders.
 '''
 #logoFile = ""
 
@@ -24,6 +24,20 @@ side = "BOTH"
 modId = "minecraft"
 type = "required"
 versionRange = "[1.21.11,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.hdr_mod]]
+modId = "cloth_config"
+type = "required"
+versionRange = "*"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.hdr_mod]]
+modId = "architectury"
+type = "required"
+versionRange = "*"
 ordering = "NONE"
 side = "BOTH"
 
