@@ -18,7 +18,7 @@ A minecraft mod that enables native HDR on Windows/Linux with Iris shaders. Curr
 
 Use these uniforms inside `#if HDR_MOD_INSTALLED` block.
 ### Output
-the output of the shader(aka. what is written to main render target in final pass) should have **scRGB-nl encoding(Rec.709 primaries, sRGB (for negative numbers use −f(−x)) transfer function)**, and younshould not use RGBA8F for scene color.
+the output of the shader(aka. what is written to main render target in final pass) should have **scRGB-nl encoding(Rec.709 primaries, sRGB (for negative numbers use −f(−x)) transfer function)**, and you should not use RGBA8F for scene color.
 ## Known Issue
 Ingame screenshot is broken.
 ## Credits
