@@ -10,22 +10,19 @@ import org.lwjgl.system.MemoryStack;
 
 import java.nio.ByteBuffer;
 
-public class CommonFloatUBO implements AutoCloseable {
+public class SingleFloatUBO implements AutoCloseable {
     private final GpuBuffer buffer;
-    private final GpuBufferSlice bufferSlice;
     private static final long size = (new Std140SizeCalculator()).putFloat().get();
-    public CommonFloatUBO(String string) {
+    public SingleFloatUBO(String string) {
         GpuDevice gpudevice = RenderSystem.getDevice();
-        this.buffer = gpudevice.createBuffer(() -> "Float UBO" + string, 136, size);
-        this.bufferSlice = buffer.slice(0L, size);
+        this.buffer = gpudevice.createBuffer(() -> "Float UBO " + string, 136, size);
     }
-    public GpuBufferSlice getBuffer(Float uiBrightness) {
+    public GpuBuffer update(Float f) {
         try (MemoryStack memorystack = MemoryStack.stackPush()) {
-            ByteBuffer bytebuffer = Std140Builder.onStack(memorystack, (int) size).putFloat(uiBrightness).get();
+            ByteBuffer bytebuffer = Std140Builder.onStack(memorystack, (int) size).putFloat(f).get();
             RenderSystem.getDevice().createCommandEncoder().writeToBuffer(this.buffer.slice(), bytebuffer);
         }
-
-        return this.bufferSlice;
+        return buffer;
     }
     public void close() {
         this.buffer.close();

@@ -4,7 +4,7 @@ import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
 import org.lwjgl.system.Configuration;
 import org.slf4j.LoggerFactory;
-import xyz.rrtt217.core.CommonFloatUBO;
+import xyz.rrtt217.core.SingleFloatUBO;
 import xyz.rrtt217.util.Enums.*;
 import org.slf4j.Logger;
 import xyz.rrtt217.config.HDRModConfig;
@@ -24,7 +24,7 @@ public final class HDRMod {
     public static boolean hasglfwLib = false;
 
     // Global UI brightness UBO.
-    public static CommonFloatUBO UiLuminanceUBO;
+    public static SingleFloatUBO UiLuminanceUBO;
     public HDRMod() {
     }
 

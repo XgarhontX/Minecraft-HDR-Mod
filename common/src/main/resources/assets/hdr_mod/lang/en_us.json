@@ -1,5 +1,7 @@
 {
   "text.autoconfig.hdr_mod.option.enableHDR": "Enable HDR (Restart your game after toggle)",
+  "text.autoconfig.hdr_mod.option.useSDRWhiteLevelAsUiLuminance": "Override auto-get SDR white level",
+  "text.autoconfig.hdr_mod.option.UiLuminance": "UI/SDR content Luminance",
   "text.autoconfig.hdr_mod.option.overrideSDRWhiteLevel": "Override auto-get SDR white level",
   "text.autoconfig.hdr_mod.option.SDRWhiteLevel": "SDR white level",
   "text.autoconfig.hdr_mod.option.overrideMinLuminance": "Override auto-get min luminance",

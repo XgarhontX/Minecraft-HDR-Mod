@@ -1,5 +1,7 @@
 package xyz.rrtt217.mixin;
 
+import com.mojang.blaze3d.buffers.GpuBuffer;
+import com.mojang.blaze3d.buffers.GpuBufferSlice;
 import com.mojang.blaze3d.pipeline.RenderTarget;
 import com.mojang.blaze3d.systems.RenderPass;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -7,15 +9,22 @@ import com.mojang.blaze3d.textures.FilterMode;
 import com.mojang.blaze3d.textures.GpuTexture;
 import com.mojang.blaze3d.textures.GpuTextureView;
 import com.mojang.blaze3d.textures.TextureFormat;
+import me.shedaniel.autoconfig.AutoConfig;
+import net.minecraft.client.Minecraft;
 import org.jspecify.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import xyz.rrtt217.config.HDRModConfig;
 import xyz.rrtt217.core.BeforeBlitRenderer;
+import xyz.rrtt217.core.SingleFloatUBO;
+import xyz.rrtt217.util.GLFWColorManagement;
 
 import java.util.OptionalInt;
+
+import static xyz.rrtt217.HDRMod.UiLuminanceUBO;
 
 @Mixin(RenderTarget.class)
 public class MixinRenderTarget {
@@ -56,13 +65,14 @@ public class MixinRenderTarget {
 
         if (this.colorTexture != null) {
             RenderSystem.getDevice().createCommandEncoder().copyTextureToTexture(this.colorTexture, BeforeBlitRenderer.beforeBlitTexture, 0, 0, 0, 0, 0, this.width, this.height);
-            //if(UiLuminanceUBO == null) UiLuminanceUBO = new CommonFloatUBO("UiLuminance");
-            //GpuBufferSlice gpuBufferSlice = UiLuminanceUBO.getBuffer( 203.0f);
+            if(UiLuminanceUBO == null) UiLuminanceUBO = new SingleFloatUBO("UiLuminance");
+            HDRModConfig config = AutoConfig.getConfigHolder(HDRModConfig.class).getConfig();
+            GpuBuffer gpuBuffer = UiLuminanceUBO.update(config.useSDRWhiteLevelAsUiLuminance ? GLFWColorManagement.glfwGetWindowSdrWhiteLevel(Minecraft.getInstance().getWindow().handle()) : config.UiLuminance);
             if (this.colorTextureView != null) {
                 try (RenderPass renderPass = RenderSystem.getDevice().createCommandEncoder().createRenderPass(() -> "Before blit", this.colorTextureView, OptionalInt.empty())) {
                     renderPass.setPipeline(BeforeBlitRenderer.BEFORE_BLIT);
                     RenderSystem.bindDefaultUniforms(renderPass);
-                    //if(UiLuminanceUBO != null) renderPass.setUniform("UiLuminance", gpuBufferSlice);
+                    if(UiLuminanceUBO != null) renderPass.setUniform("UiLuminance", gpuBuffer);
                     renderPass.bindTexture("InSampler", BeforeBlitRenderer.beforeBlitTextureView, RenderSystem.getSamplerCache().getClampToEdge(FilterMode.NEAREST));
                     renderPass.draw(0, 3);
                 }

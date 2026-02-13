@@ -1,5 +1,7 @@
 {
   "text.autoconfig.hdr_mod.option.enableHDR": "启用HDR（重启游戏后生效）",
+  "text.autoconfig.hdr_mod.option.useSDRWhiteLevelAsUiLuminance": "使用自动获取的SDR白电平作为UI亮度",
+  "text.autoconfig.hdr_mod.option.UiLuminance": "UI/SDR内容亮度",
   "text.autoconfig.hdr_mod.option.overrideSDRWhiteLevel": "是否覆盖自动获取的SDR白电平",
   "text.autoconfig.hdr_mod.option.SDRWhiteLevel": "SDR白电平",
   "text.autoconfig.hdr_mod.option.overrideMinLuminance": "是否覆盖自动获取的最小亮度",

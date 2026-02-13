@@ -18,8 +18,9 @@ public class MixinIrisExclusiveUniforms {
     @Inject(method = "addIrisExclusiveUniforms", at = @At("RETURN"))
     private static void addHDRModExclusiveUniforms(UniformHolder uniforms, FrameUpdateNotifier updateNotifier, CallbackInfo ci){
         HDRModConfig config = AutoConfig.getConfigHolder(HDRModConfig.class).getConfig();
-        uniforms.uniform1f(UniformUpdateFrequency.PER_FRAME,"MinLuminance",() -> config.overrideMinLuminance ? config.MinLuminance : GLFWColorManagement.glfwGetWindowMinLuminance(Minecraft.getInstance().getWindow().handle()));
-        uniforms.uniform1f(UniformUpdateFrequency.PER_FRAME,"MaxLuminance",() -> config.overrideMaxLuminance ? config.MaxLuminance : GLFWColorManagement.glfwGetWindowMaxLuminance(Minecraft.getInstance().getWindow().handle()));
+        uniforms.uniform1f(UniformUpdateFrequency.PER_FRAME,"MinBrightness",() -> config.overrideMinLuminance ? config.MinLuminance : GLFWColorManagement.glfwGetWindowMinLuminance(Minecraft.getInstance().getWindow().handle()));
+        uniforms.uniform1f(UniformUpdateFrequency.PER_FRAME,"MaxBrightness",() -> config.overrideMaxLuminance ? config.MaxLuminance : GLFWColorManagement.glfwGetWindowMaxLuminance(Minecraft.getInstance().getWindow().handle()));
         uniforms.uniform1f(UniformUpdateFrequency.PER_FRAME,"SDRWhiteLevel", () -> config.overrideSDRWhiteLevel ? config.SDRWhiteLevel : GLFWColorManagement.glfwGetWindowSdrWhiteLevel(Minecraft.getInstance().getWindow().handle()));
+        uniforms.uniform1f(UniformUpdateFrequency.PER_FRAME,"UIBrightness", () -> config.useSDRWhiteLevelAsUiLuminance ? GLFWColorManagement.glfwGetWindowSdrWhiteLevel(Minecraft.getInstance().getWindow().handle()) : config.UiLuminance);
     }
 }

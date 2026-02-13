@@ -5,6 +5,7 @@ import com.mojang.blaze3d.platform.DisplayData;
 import com.mojang.blaze3d.platform.ScreenManager;
 import com.mojang.blaze3d.platform.Window;
 import com.mojang.blaze3d.platform.WindowEventHandler;
+import com.mojang.blaze3d.shaders.UniformType;
 import me.shedaniel.autoconfig.AutoConfig;
 import org.lwjgl.glfw.GLFW;
 import org.slf4j.Logger;
@@ -64,7 +65,7 @@ import xyz.rrtt217.config.HDRModConfig;
             for(Enums.TransferFunction tf : Enums.TransferFunction.values()) {
                 builder = builder.withShaderDefine("TRANSFER_FUNCTION_"+tf.toString(), tf.getId());
             }
-            // builder.withUniform("UiLuminance", UniformType.UNIFORM_BUFFER);
+            builder.withUniform("UiLuminance", UniformType.UNIFORM_BUFFER);
 
             BeforeBlitRenderer.BEFORE_BLIT = builder.build();
         }

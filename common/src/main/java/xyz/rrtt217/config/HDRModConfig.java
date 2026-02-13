@@ -8,6 +8,9 @@ import xyz.rrtt217.util.Enums.*;
 public class HDRModConfig implements ConfigData {
     public boolean enableHDR = true;
 
+    public boolean useSDRWhiteLevelAsUiLuminance = false;
+    public float UiLuminance = 203.0f;
+
     public boolean overrideSDRWhiteLevel = false;
     public float SDRWhiteLevel = 80.0f;
     public boolean overrideMinLuminance = false;
