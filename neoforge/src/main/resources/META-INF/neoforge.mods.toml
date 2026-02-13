@@ -7,7 +7,7 @@ license = "MIT"
 modId = "hdr_mod"
 version = "${version}"
 displayName = "HDR Mod"
-authors = "Me!"
+authors = "rrtt217"
 description = '''
 Enable native HDR in Minecraft with Iris shaders.
 '''
