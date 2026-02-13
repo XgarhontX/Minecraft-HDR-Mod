@@ -4,8 +4,6 @@ import com.mojang.blaze3d.shaders.ShaderSource;
 import com.mojang.blaze3d.systems.GpuDevice;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.main.GameConfig;
-import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.VanillaPackResources;
 import org.apache.commons.io.IOUtils;
@@ -16,14 +14,13 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import xyz.rrtt217.HDRMod;
+import xyz.rrtt217.core.BeforeBlitRenderer;
 import xyz.rrtt217.util.LibraryExtractor;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
 
 import static xyz.rrtt217.HDRMod.LOGGER;
 
@@ -62,7 +59,7 @@ public class MixinMinecraft {
                 return null;
             }
         };
-        gpuDevice.precompilePipeline(HDRMod.BEFORE_BLIT, shaderSource);
-        HDRMod.isBeforeBlitReady = true;
+        gpuDevice.precompilePipeline(BeforeBlitRenderer.BEFORE_BLIT, shaderSource);
+        BeforeBlitRenderer.isBeforeBlitReady = true;
     }
 }
