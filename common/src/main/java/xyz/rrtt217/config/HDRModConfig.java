@@ -13,9 +13,9 @@ public class HDRModConfig implements ConfigData {
 
     public boolean autoSetGamePaperWhiteBrightness = true;
     public float customGamePaperWhiteBrightness = 203.0f;
-    public boolean autoSetGamePeakBrightness = true;
+    public boolean autoSetGamePeakBrightness = false;
     public float customGamePeakBrightness = 1000.0f;
-    public boolean autoSetGameMinimumBrightness = true;
+    public boolean autoSetGameMinimumBrightness = false;
     public float customGameMinimumBrightness = 0.0f;
 
     public boolean autoSetPrimaries = true;
