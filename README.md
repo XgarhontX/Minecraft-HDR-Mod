@@ -27,7 +27,7 @@ the output of the shader(aka. what is written to main render target in final pas
 - Xaero Map may cause black screen on startup, but recover to normal before you see title screen.
 ## Credits
 - Tom94, for [glfw fork with color management](https://github.com/Tom94/glfw/tree/color-management);
-- IMS212, for [Iris shaders](https://github.com/IrisShaders/Iris) and [original gifw patch idea](https://github.com/IMS212/glfw/tree/hdr);
+- IMS212, for [Iris shaders](https://github.com/IrisShaders/Iris) and [original glfw patch idea](https://github.com/IMS212/glfw/tree/hdr);
 - XgarhontX and some other fellows, for working on RenoDX Minecraft HDR and shader patches, and helping me to make color transform correct.
 ## Copyright
-The main HDR Mod repo is licensed under MIT. Bundled GLFW from Tom94's fork is licensed under the zlib/libpng license.
+The main HDR Mod repo is licensed under MIT. Bundled GLFW from Tom94's/mine fork is licensed under the zlib/libpng license.
