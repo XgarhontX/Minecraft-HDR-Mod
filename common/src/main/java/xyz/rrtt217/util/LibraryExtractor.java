@@ -1,7 +1,6 @@
 package xyz.rrtt217.util;
 
 import dev.architectury.platform.Platform;
-import net.minecraft.client.Minecraft;
 import xyz.rrtt217.HDRMod;
 
 import java.io.FileNotFoundException;
@@ -9,90 +8,97 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.HashMap;
+import java.util.Map;
 
 public class LibraryExtractor {
-    public static Path extractLibraries(HashMap<String,String> platformLibNameMap, String targetDir) throws IOException, FileNotFoundException {
-        Path gamedir = Platform.getGameFolder();
-        Path libExtractDir = gamedir.resolve(targetDir);
+    public static Path extractLibraries(Map<String, String> platformLibNameMap, String targetDir) throws IOException {
+        Path tempDir = Path.of(System.getProperty("java.io.tmpdir"));
+        Path libExtractDir = tempDir.resolve(targetDir);
         Files.createDirectories(libExtractDir);
+
         String osName = System.getProperty("os.name").toLowerCase();
         String osArch = System.getProperty("os.arch").toLowerCase();
-        String fullLibName = "";
-        String subDirectory;
+
         HDRMod.LOGGER.info("Extracting libraries...");
         HDRMod.LOGGER.info("OS: {}", osName);
         HDRMod.LOGGER.info("OS arch: {}", osArch);
+
+        String platformKey;
+        String libExtension;
+        String subDirBase;
+
         if (osName.contains("win")) {
-            fullLibName = platformLibNameMap.get("win") + ".dll";
-            subDirectory = "windows/";
-            if (osArch.contains("amd64") || osArch.contains("x86_64") || osArch.contains("x64")) {
-                subDirectory += "x64";
-            } else if (osArch.contains("i386") || osArch.contains("i686")) {
-                subDirectory += "i386";
-            } else if (osArch.contains("arm")) {
-                subDirectory += "arm";
-            } else if (osArch.contains("aarch64") || osArch.contains("arm64")) {
-                subDirectory += "arm64";
-            } else {
-                subDirectory += osArch;
-            }
+            platformKey = "win";
+            libExtension = ".dll";
+            subDirBase = "windows";
         } else if (osName.contains("mac")) {
-            fullLibName = platformLibNameMap.get("mac") + ".dylib";
-            subDirectory = "mac/";
-            if (osArch.contains("amd64") || osArch.contains("x86_64") || osArch.contains("x64")) {
-                subDirectory += "x64";
-            } else if (osArch.contains("i386") || osArch.contains("i686")) {
-                subDirectory += "i386";
-            } else if (osArch.contains("arm")) {
-                subDirectory += "arm";
-            } else if (osArch.contains("aarch64") || osArch.contains("arm64")) {
-                subDirectory += "arm64";
-            } else {
-                subDirectory += osArch;
-            }
+            platformKey = "mac";
+            libExtension = ".dylib";
+            subDirBase = "mac";
         } else if (osName.contains("linux")) {
-            fullLibName = platformLibNameMap.get("linux") + ".so";
-            subDirectory = "linux/";
-            if (osArch.contains("amd64") || osArch.contains("x86_64") || osArch.contains("x64")) {
-                subDirectory += "x64";
-            } else if (osArch.contains("i386") || osArch.contains("i686")) {
-                subDirectory += "i386";
-            } else if (osArch.contains("arm")) {
-                subDirectory += "arm";
-            } else if (osArch.contains("aarch64") || osArch.contains("arm64")) {
-                subDirectory += "arm64";
-            } else {
-                subDirectory += osArch;
-            }
+            platformKey = "linux";
+            libExtension = ".so";
+            subDirBase = "linux";
         } else {
-            if(platformLibNameMap.get(osName) != null) fullLibName = platformLibNameMap.get(osName) + ".so";
-            else fullLibName = platformLibNameMap.get("linux") + ".so";
-            subDirectory = osName+"/";
-            if (osArch.contains("amd64") || osArch.contains("x86_64") || osArch.contains("x64")) {
-                subDirectory += "x64";
-            } else if (osArch.contains("i386") || osArch.contains("i686")) {
-                subDirectory += "i386";
-            } else if (osArch.contains("arm")) {
-                subDirectory += "arm";
-            } else if (osArch.contains("aarch64") || osArch.contains("arm64")) {
-                subDirectory += "arm64";
-            } else {
-                subDirectory += osArch;
-            }
+            platformKey = osName;
+            libExtension = ".so";
+            subDirBase = osName;
         }
-        ClassLoader loader = LibraryExtractor.class.getClassLoader();
-        HDRMod.LOGGER.info("Finding libraries in path {}", "libraries/" + subDirectory + "/" + fullLibName);
-        Path outputLibPath = libExtractDir.resolve(fullLibName);
-        if(!Files.exists(outputLibPath)) {
-            try (InputStream is = loader.getResourceAsStream("libraries/" + subDirectory + "/" + fullLibName)) {
-                if (is == null) {
-                    throw new FileNotFoundException("Could not find library file: " + fullLibName);
-                } else {
-                    Files.copy(is, outputLibPath);
+
+        // Get base name of the lib.
+        String libBaseName = platformLibNameMap.get(platformKey);
+        if (libBaseName == null) {
+            // fallback to linux mapping on unknown system.
+            if (!platformKey.equals("linux") && !platformKey.equals("win") && !platformKey.equals("mac")) {
+                libBaseName = platformLibNameMap.get("linux");
+                if (libBaseName == null) {
+                    throw new FileNotFoundException("No library name mapping found for OS: " + osName +
+                            " (key: " + platformKey + ") and no fallback 'linux' mapping.");
                 }
+                HDRMod.LOGGER.warn("No mapping for OS '{}', using fallback 'linux' mapping.", osName);
+            } else {
+                throw new FileNotFoundException("Missing library name mapping for key: " + platformKey);
             }
         }
-        return libExtractDir.resolve(fullLibName);
+
+        String fullLibName = libBaseName + libExtension;
+        String archDir = mapArchitecture(osArch);
+        String resourcePath = "libraries/" + subDirBase + "/" + archDir + "/" + fullLibName;
+
+        HDRMod.LOGGER.info("Looking for library in classpath: {}", resourcePath);
+
+        Path outputLibPath = libExtractDir.resolve(fullLibName);
+
+        if (Files.exists(outputLibPath)) {
+            HDRMod.LOGGER.info("Library already exists at {}, skipping extraction.", outputLibPath);
+        } else {
+            try (InputStream is = LibraryExtractor.class.getClassLoader().getResourceAsStream(resourcePath)) {
+                if (is == null) {
+                    throw new FileNotFoundException("Could not find library resource: " + resourcePath);
+                }
+                Files.copy(is, outputLibPath);
+                HDRMod.LOGGER.info("Extracted library to {}", outputLibPath);
+            }
+        }
+
+        return outputLibPath;
+    }
+
+    /**
+     * Map os architecture to standard names.
+     */
+    private static String mapArchitecture(String osArch) {
+        osArch = osArch.toLowerCase();
+        if (osArch.contains("amd64") || osArch.contains("x86_64") || osArch.contains("x64")) {
+            return "x64";
+        } else if (osArch.contains("i386") || osArch.contains("i686") || osArch.contains("x86")) {
+            return "i386";
+        } else if (osArch.contains("aarch64") || osArch.contains("arm64")) {
+            return "arm64";
+        } else if (osArch.contains("arm")) {
+            return "arm";
+        } else {
+            return osArch;
+        }
     }
 }

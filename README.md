@@ -4,6 +4,8 @@ A minecraft mod that enables native HDR on Windows/Linux with Iris shaders. Curr
 - Native HDR, both for Windows scRGB and HDR10/PQ;
 - UI color correction by a BEFORE_BLIT pass;
 - Ingame config using Cloth Config API(May switch to Sodium Options API later)
+## For users
+- If you're on Windows, don't forget to install the latest Visual C++ Redistributable.
 ## For shader patches
 ### Macros
 - `HDR_MOD_INSTALLED`
@@ -20,7 +22,8 @@ Use these uniforms inside `#if HDR_MOD_INSTALLED` block.
 ### Output
 the output of the shader(aka. what is written to main render target in final pass) should have **scRGB-nl encoding(Rec.709 primaries, sRGB (for negative numbers use −f(−x)) transfer function)**, and you should not use RGBA8F for scene color.
 ## Known Issue
-Ingame screenshot is broken.
+- Ingame screenshot is broken.
+- Xaero Map may cause black screen on startup, but recover to normal before you see title screen.
 ## Credits
 - Tom94, for [glfw fork with color management](https://github.com/Tom94/glfw/tree/color-management);
 - IMS212, for [Iris shaders](https://github.com/IrisShaders/Iris) and [original gifw patch idea](https://github.com/IMS212/glfw/tree/hdr);
