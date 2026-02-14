@@ -6,6 +6,7 @@ A minecraft mod that enables native HDR on Windows/Linux with Iris shaders. Curr
 - Ingame config using Cloth Config API(May switch to Sodium Options API later)
 ## For users
 - If you're on Windows, don't forget to install the latest Visual C++ Redistributable.
+- Clean temp file if your game doesn't start (path can be found in log, %TEMP%/glfw on Windows and /tmp/glfw on Linux).
 ## For shader patches
 ### Macros
 - `HDR_MOD_INSTALLED`
