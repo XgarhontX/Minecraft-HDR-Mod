@@ -18,9 +18,9 @@ public class MixinIrisExclusiveUniforms {
     @Inject(method = "addIrisExclusiveUniforms", at = @At("RETURN"))
     private static void addHDRModExclusiveUniforms(UniformHolder uniforms, FrameUpdateNotifier updateNotifier, CallbackInfo ci){
         HDRModConfig config = AutoConfig.getConfigHolder(HDRModConfig.class).getConfig();
-        uniforms.uniform1f(UniformUpdateFrequency.PER_FRAME,"HdrGameMinimumBrightness",() -> config.autoSetGameMinimumBrightness ? GLFWColorManagement.glfwGetWindowMinLuminance(Minecraft.getInstance().getWindow().handle()) : config.customGameMinimumBrightness );
-        uniforms.uniform1f(UniformUpdateFrequency.PER_FRAME,"HdrGamePeakBrightness",() -> config.autoSetGamePeakBrightness ? GLFWColorManagement.glfwGetWindowMaxLuminance(Minecraft.getInstance().getWindow().handle()) : config.customGamePeakBrightness );
-        uniforms.uniform1f(UniformUpdateFrequency.PER_FRAME,"HdrGamePaperWhiteBrightness", () -> config.autoSetGamePaperWhiteBrightness ? GLFWColorManagement.glfwGetWindowSdrWhiteLevel(Minecraft.getInstance().getWindow().handle()) : config.customGamePaperWhiteBrightness);
-        uniforms.uniform1f(UniformUpdateFrequency.PER_FRAME,"HdrUIBrightness", () -> config.autoSetUIBrightness ? GLFWColorManagement.glfwGetWindowSdrWhiteLevel(Minecraft.getInstance().getWindow().handle()) : config.uiBrightness);
+        uniforms.uniform1f(UniformUpdateFrequency.PER_FRAME,"HdrGameMinimumBrightness",() -> config.customGameMinimumBrightness < 0 ? GLFWColorManagement.glfwGetWindowMinLuminance(Minecraft.getInstance().getWindow().handle()) : config.customGameMinimumBrightness );
+        uniforms.uniform1f(UniformUpdateFrequency.PER_FRAME,"HdrGamePeakBrightness",() -> config.customGamePeakBrightness < 0 ? GLFWColorManagement.glfwGetWindowMaxLuminance(Minecraft.getInstance().getWindow().handle()) : config.customGamePeakBrightness );
+        uniforms.uniform1f(UniformUpdateFrequency.PER_FRAME,"HdrGamePaperWhiteBrightness", () -> config.customGamePaperWhiteBrightness < 0 ? GLFWColorManagement.glfwGetWindowSdrWhiteLevel(Minecraft.getInstance().getWindow().handle()) : config.customGamePaperWhiteBrightness);
+        uniforms.uniform1f(UniformUpdateFrequency.PER_FRAME,"HdrUIBrightness", () -> config.uiBrightness < 0 ? GLFWColorManagement.glfwGetWindowSdrWhiteLevel(Minecraft.getInstance().getWindow().handle()) : config.uiBrightness);
     }
 }

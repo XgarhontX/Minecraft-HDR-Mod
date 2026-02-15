@@ -8,15 +8,11 @@ import xyz.rrtt217.util.Enums.*;
 public class HDRModConfig implements ConfigData {
     public boolean enableHDR = true;
 
-    public boolean autoSetUIBrightness = false;
-    public float uiBrightness = 203.0f;
-
-    public boolean autoSetGamePaperWhiteBrightness = true;
-    public float customGamePaperWhiteBrightness = 203.0f;
-    public boolean autoSetGamePeakBrightness = false;
+    public float uiBrightness = -1.0f;
+    public float customGamePaperWhiteBrightness = -1.0f;
     public float customGamePeakBrightness = 1000.0f;
-    public boolean autoSetGameMinimumBrightness = false;
     public float customGameMinimumBrightness = 0.0f;
+    public float customEotfEmulate = System.getProperty("os.name").startsWith("Windows") ? -1.0f : 0.0f;
 
     public boolean autoSetPrimaries = true;
     public Primaries customPrimaries = Primaries.SRGB;

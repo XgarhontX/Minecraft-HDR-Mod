@@ -12,7 +12,7 @@ import net.minecraft.resources.Identifier;
 import org.lwjgl.system.Configuration;
 import org.slf4j.LoggerFactory;
 import xyz.rrtt217.core.PngjHDRScreenshot;
-import xyz.rrtt217.core.SingleFloatUBO;
+import xyz.rrtt217.core.FloatNumberUBO;
 import xyz.rrtt217.util.Enums.*;
 import org.slf4j.Logger;
 import xyz.rrtt217.config.HDRModConfig;
@@ -32,7 +32,7 @@ public final class HDRMod {
     public static boolean hasglfwLib = false;
 
     // Global UI brightness UBO.
-    public static SingleFloatUBO UiBrightnessUBO;
+    public static FloatNumberUBO UiBrightnessUBO;
 
     // Key Mapping.
     public static final KeyMapping.Category HDRModCategory = KeyMapping.Category.register(Identifier.fromNamespaceAndPath("hdr_mod","main"));

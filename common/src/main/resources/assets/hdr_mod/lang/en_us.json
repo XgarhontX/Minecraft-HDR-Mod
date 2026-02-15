@@ -1,12 +1,8 @@
 {
   "text.autoconfig.hdr_mod.option.enableHDR": "Enable HDR",
-  "text.autoconfig.hdr_mod.option.autoSetUIBrightness": "Auto Set UI Brightness",
   "text.autoconfig.hdr_mod.option.uiBrightness": "Custom UI Brightness",
-  "text.autoconfig.hdr_mod.option.autoSetGamePaperWhiteBrightness": "Auto Set Game Paper White Brightness",
   "text.autoconfig.hdr_mod.option.customGamePaperWhiteBrightness": "Custom Game Paper White Brightness",
-  "text.autoconfig.hdr_mod.option.autoSetGameMinimumBrightness": "Auto Set Game Minimum Brightness",
   "text.autoconfig.hdr_mod.option.customGameMinimumBrightness": "Custom Game Minimum Brightness",
-  "text.autoconfig.hdr_mod.option.autoSetGamePeakBrightness": "Auto Set Game Peak Brightness",
   "text.autoconfig.hdr_mod.option.customGamePeakBrightness": "Custom Game Peak Brightness",
   "text.autoconfig.hdr_mod.option.autoSetPrimaries": "Auto Set Primaries",
   "text.autoconfig.hdr_mod.option.customPrimaries": "Custom Primaries (Only For Debug)",

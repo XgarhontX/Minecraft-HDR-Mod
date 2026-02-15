@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import xyz.rrtt217.config.HDRModConfig;
 import xyz.rrtt217.core.BeforeBlitRenderer;
-import xyz.rrtt217.core.SingleFloatUBO;
+import xyz.rrtt217.core.FloatNumberUBO;
 import xyz.rrtt217.util.GLFWColorManagement;
 
 import java.util.OptionalInt;
@@ -64,9 +64,12 @@ public class MixinRenderTarget {
 
         if (this.colorTexture != null) {
             RenderSystem.getDevice().createCommandEncoder().copyTextureToTexture(this.colorTexture, BeforeBlitRenderer.beforeBlitTexture, 0, 0, 0, 0, 0, this.width, this.height);
-            if(UiBrightnessUBO == null) UiBrightnessUBO = new SingleFloatUBO("HdrUIBrightness");
+            if(UiBrightnessUBO == null) UiBrightnessUBO = new FloatNumberUBO("HdrUIBrightness", 2);
             HDRModConfig config = AutoConfig.getConfigHolder(HDRModConfig.class).getConfig();
-            GpuBuffer gpuBuffer = UiBrightnessUBO.update(config.autoSetUIBrightness ? GLFWColorManagement.glfwGetWindowSdrWhiteLevel(Minecraft.getInstance().getWindow().handle()) : config.uiBrightness);
+            GpuBuffer gpuBuffer = UiBrightnessUBO.update(new Float[]{
+                    config.uiBrightness < 0 ? GLFWColorManagement.glfwGetWindowSdrWhiteLevel(Minecraft.getInstance().getWindow().handle()) : config.uiBrightness, // For UI Brightness
+                    config.customEotfEmulate < 0 ? GLFWColorManagement.glfwGetWindowSdrWhiteLevel(Minecraft.getInstance().getWindow().handle()) : config.customEotfEmulate
+            });
             if (this.colorTextureView != null) {
                 try (RenderPass renderPass = RenderSystem.getDevice().createCommandEncoder().createRenderPass(() -> "Before blit", this.colorTextureView, OptionalInt.empty())) {
                     renderPass.setPipeline(BeforeBlitRenderer.BEFORE_BLIT);

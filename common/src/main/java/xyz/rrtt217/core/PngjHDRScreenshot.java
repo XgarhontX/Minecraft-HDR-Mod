@@ -98,7 +98,7 @@ public class PngjHDRScreenshot {
                             }
                             if (HDRMod.WindowTransferFunction == Enums.TransferFunction.EXT_LINEAR) {
                                 float[] rgb = Arrays.copyOf(datas, 3);
-                                System.arraycopy(scRGBtoPQ(rgb, config.autoSetGamePaperWhiteBrightness ? GLFWColorManagement.glfwGetWindowSdrWhiteLevel(Minecraft.getInstance().getWindow().handle()) : config.customGamePaperWhiteBrightness), 0, datas, 0, 3);
+                                System.arraycopy(scRGBtoPQ(rgb, config.customGamePaperWhiteBrightness < 0 ? GLFWColorManagement.glfwGetWindowSdrWhiteLevel(Minecraft.getInstance().getWindow().handle()) : config.customGamePaperWhiteBrightness), 0, datas, 0, 3);
                             }
                             // Write to line.
                             for (int c = 0; c < png.imgInfo.channels; c++) {
