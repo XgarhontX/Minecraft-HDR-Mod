@@ -146,8 +146,8 @@ public class PngjHDRScreenshot {
 
     public static float[] scRGBtoPQ(float[] scRGB, float referenceWhiteNits) {
         // PQ constants (SMPTE ST 2084)
-        final float m1 = 2610.0f / 16384.0f;        // 0.1593017578125
-        final float m2 = 2523.0f / 4096.0f;         // 0.615234375
+        final float m1 = 2610.0f / 16384.0f;
+        final float m2 = 2523.0f / 4096.0f * 128.0f;
         final float c1 = 3424.0f / 4096.0f;         // 0.8359375
         final float c2 = 2413.0f / 4096.0f * 32.0f; // 18.8515625
         final float c3 = 2392.0f / 4096.0f * 32.0f; // 18.6875
