@@ -1,15 +1,23 @@
 {
-  "text.autoconfig.hdr_mod.option.enableHDR": "启用HDR",
-  "text.autoconfig.hdr_mod.option.uiBrightness": "自定义UI亮度",
+  "text.autoconfig.hdr_mod.option.enableHDR": "启用 HDR",
+  "text.autoconfig.hdr_mod.option.uiBrightness": "自定义界面亮度",
   "text.autoconfig.hdr_mod.option.customGamePaperWhiteBrightness": "自定义游戏参考白亮度",
   "text.autoconfig.hdr_mod.option.customGameMinimumBrightness": "自定义游戏最小亮度",
   "text.autoconfig.hdr_mod.option.customGamePeakBrightness": "自定义游戏峰值亮度",
+  "text.autoconfig.hdr_mod.option.customEotfEmulate": "EOTF / Gamma 校正 2.2 阈值",
+  "text.autoconfig.hdr_mod.option.enableHDR.@Tooltip": "启用 HDR",
+  "text.autoconfig.hdr_mod.option.uiBrightness.@Tooltip": "以尼特为单位，设置界面元素和原版游戏（即未使用光影包时）的参考白亮度。设置为负数以使用显示器报告的 SDR 参考白亮度。",
+  "text.autoconfig.hdr_mod.option.customGamePaperWhiteBrightness.@Tooltip": "以尼特为单位，设置游戏/场景的参考白亮度。设置为负数以使用显示器报告的值。",
+  "text.autoconfig.hdr_mod.option.customGameMinimumBrightness.@Tooltip": "以尼特为单位，设置显示器可输出的最大亮度。设置为负数以使用显示器报告的值。",
+  "text.autoconfig.hdr_mod.option.customGamePeakBrightness.@Tooltip": "以尼特为单位，设置显示器可输出的最小亮度。设置为负数以使用显示器报告的值。如果不确定，请留 0。",
+  "text.autoconfig.hdr_mod.option.customEotfEmulate.@Tooltip": "校正提升的黑色区域以匹配 SDR。如果操作系统或显示器尚未执行此操作，请使用此项。设置为负数以使用显示器报告的 SDR 参考白亮度。",
   "text.autoconfig.hdr_mod.option.autoSetPrimaries": "自动设置基色",
-  "text.autoconfig.hdr_mod.option.customPrimaries": "自定义基色（仅调试）",
+  "text.autoconfig.hdr_mod.option.customPrimaries": "自定义基色 (仅用于调试)",
   "text.autoconfig.hdr_mod.option.autoSetTransferFunction": "自动设置传递函数",
-  "text.autoconfig.hdr_mod.option.customTransferFunction": "自定义传递函数（仅调试）",
-  "text.autoconfig.hdr_mod.option.forceDisableGlfwWorkound": "强行关闭针对特定平台的GLFW规避措施 (仅调试)",
-  "text.autoconfig.hdr_mod.title": "HDR Mod配置",
+  "text.autoconfig.hdr_mod.option.customTransferFunction": "自定义传递函数 (仅用于调试)",
+  "text.autoconfig.hdr_mod.option.forceDisableGlfwWorkound": "强制禁用 GLFW 兼容性调整 (仅用于调试)",
+
+  "text.autoconfig.hdr_mod.title": "HDR 模组配置",
   "key.hdr_mod.open_config_menu": "打开配置菜单",
-  "key.category.hdr_mod.main": "HDR Mod"
+  "key.category.hdr_mod.main": "HDR 模组"
 }

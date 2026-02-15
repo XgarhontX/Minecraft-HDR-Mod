@@ -3,9 +3,11 @@ A minecraft mod that enables native HDR on Windows/Linux with Iris shaders. Curr
 ## What the mod have achieved
 - Native HDR, both for Windows scRGB and HDR10/PQ;
 - UI color correction by a BEFORE_BLIT pass;
-- Ingame config using Cloth Config API(May switch to Sodium Options API later)
+- Ingame config using Cloth Config API;
+- Ingame HDR screenshot.
 ## For users
 - Adjust the config ingame using a key binding(default F9);
+- Take an HDR screenshot ingame using a key binding(default F10);
 - If your game is too bright/dark, try to disable auto set brightness and adjust the custom values yourself;
 - If you're on Windows, don't forget to install the latest Visual C++ Redistributable.
 - Clean temp file if your game doesn't start (path can be found in log, %TEMP%/glfw on Windows and /tmp/glfw on Linux).
