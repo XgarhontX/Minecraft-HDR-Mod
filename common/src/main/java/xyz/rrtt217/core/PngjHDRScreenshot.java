@@ -2,7 +2,6 @@ package xyz.rrtt217.core;
 
 import ar.com.hjg.pngj.ImageInfo;
 import ar.com.hjg.pngj.ImageLineInt;
-import ar.com.hjg.pngj.IImageLine;
 import ar.com.hjg.pngj.PngWriter;
 import ar.com.hjg.pngj.chunks.PngChunkICCP;
 import com.mojang.blaze3d.buffers.GpuBuffer;
@@ -19,15 +18,11 @@ import net.minecraft.util.Util;
 import org.jspecify.annotations.Nullable;
 import xyz.rrtt217.HDRMod;
 import xyz.rrtt217.config.HDRModConfig;
-import xyz.rrtt217.util.Enums;
-import xyz.rrtt217.util.GLFWColorManagement;
-import xyz.rrtt217.util.HDRModInjectHooks;
-import xyz.rrtt217.util.LibraryExtractor;
+import xyz.rrtt217.util.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.function.Consumer;
 
@@ -94,11 +89,11 @@ public class PngjHDRScreenshot {
                             // Do transform.
                             if (HDRMod.WindowPrimaries == Enums.Primaries.SRGB) {
                                 float[] rgb = Arrays.copyOf(datas, 3);
-                                System.arraycopy(linearColorspaceTransform(rgb, linear709to2020Matrix), 0, datas, 0, 3);
+                                System.arraycopy(ColorTransforms.linearColorspaceTransform(rgb, ColorTransforms.linear709to2020Matrix), 0, datas, 0, 3);
                             }
                             if (HDRMod.WindowTransferFunction == Enums.TransferFunction.EXT_LINEAR) {
                                 float[] rgb = Arrays.copyOf(datas, 3);
-                                System.arraycopy(scRGBtoPQ(rgb, config.customGamePaperWhiteBrightness < 0 ? GLFWColorManagement.glfwGetWindowSdrWhiteLevel(Minecraft.getInstance().getWindow().handle()) : config.customGamePaperWhiteBrightness), 0, datas, 0, 3);
+                                System.arraycopy(ColorTransforms.scRGBtoPQ(rgb, config.customGamePaperWhiteBrightness < 0 ? GLFWColorManagement.glfwGetWindowSdrWhiteLevel(Minecraft.getInstance().getWindow().handle()) : config.customGamePaperWhiteBrightness), 0, datas, 0, 3);
                             }
                             // Write to line.
                             for (int c = 0; c < png.imgInfo.channels; c++) {
@@ -133,63 +128,5 @@ public class PngjHDRScreenshot {
             ++i;
         }
     }
-
-
-    // Will move the following methods to a seperate class.
-    public static float readHalfFloat(byte[] data, int offset, boolean littleEndian) {
-        short bits = (short) (((data[offset + 1] & 0xFF) << 8) | (data[offset] & 0xFF));
-        if (!littleEndian) {
-            bits = (short) (((data[offset] & 0xFF) << 8) | (data[offset + 1] & 0xFF));
-        }
-        return Float.float16ToFloat(bits);
-    }
-
-    public static float[] scRGBtoPQ(float[] scRGB, float referenceWhiteNits) {
-        // PQ constants (SMPTE ST 2084)
-        final float m1 = 2610.0f / 16384.0f;
-        final float m2 = 2523.0f / 4096.0f * 128.0f;
-        final float c1 = 3424.0f / 4096.0f;         // 0.8359375
-        final float c2 = 2413.0f / 4096.0f * 32.0f; // 18.8515625
-        final float c3 = 2392.0f / 4096.0f * 32.0f; // 18.6875
-
-        float[] pq = new float[3];
-        for (int i = 0; i < 3; i++) {
-            // scRGB to absolute brightness
-            float linearNits = scRGB[i] * referenceWhiteNits;
-
-            // Clamp
-            linearNits = Math.max(linearNits, 0.0f);
-
-            // Normalise
-            float Y = linearNits / 10000.0f;
-            Y = Math.min(Y, 1.0f); // 规范要求 Y ≤ 1
-
-            // PQ encode
-            float Ypow = (float) Math.pow(Y, m1);
-            float num = c1 + c2 * Ypow;
-            float den = 1.0f + c3 * Ypow;
-            float V = (float) Math.pow(num / den, m2);
-
-            pq[i] = V;
-        }
-        return pq;
-    }
-
-    public static float[] linearColorspaceTransform(float[] originalData, float[][] transformMatrix){
-        float r = originalData[0];
-        float g = originalData[1];
-        float b = originalData[2];
-
-        float rnew = transformMatrix[0][0] * r + transformMatrix[0][1] * g + transformMatrix[0][2] * b;
-        float gnew = transformMatrix[1][0] * r + transformMatrix[1][1] * g + transformMatrix[1][2] * b;
-        float bnew = transformMatrix[2][0] * r + transformMatrix[2][1] * g + transformMatrix[2][2] * b;
-
-        return new float[]{rnew, gnew, bnew};
-    }
-    public static final float[][] linear709to2020Matrix =  new float[][]{
-        {0.6274039149284363f, 0.3292830288410187f, 0.04331306740641594f},
-        {0.06909728795289993f, 0.9195404052734375f, 0.01136231515556574f},
-        {0.0163914393633604f, 0.08801330626010895f, 0.8955952525138855f}
-    };
 }
 
