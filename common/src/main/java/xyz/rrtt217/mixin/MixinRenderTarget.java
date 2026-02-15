@@ -8,6 +8,7 @@ import com.mojang.blaze3d.textures.FilterMode;
 import com.mojang.blaze3d.textures.GpuTexture;
 import com.mojang.blaze3d.textures.GpuTextureView;
 import com.mojang.blaze3d.textures.TextureFormat;
+import dev.architectury.platform.Platform;
 import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.client.Minecraft;
 import org.jspecify.annotations.Nullable;
@@ -45,10 +46,24 @@ public class MixinRenderTarget {
     @Inject(method = "blitToScreen", at = @At("HEAD"))
     private void hdr_mod$beforeBlitRenderer(CallbackInfo ci) {
         RenderSystem.assertOnRenderThread();
-        if (!BeforeBlitRenderer.isBeforeBlitReady) return;
+
 
         HDRModConfig config = AutoConfig.getConfigHolder(HDRModConfig.class).getConfig();
-        if(config.forceDisableBeforeBlitPipeline) return;
+        if (!BeforeBlitRenderer.isBeforeBlitReady || config.forceDisableBeforeBlitPipeline) return;
+        if (BeforeBlitRenderer.isGameRenderingCanceled){
+            BeforeBlitRenderer.isGameRenderingCanceled = false;
+            return;
+        }
+
+        // Still need reflection.
+        if(Platform.isModLoaded("dynamic_fps")){
+            try{
+                Class<?> clazz = Class.forName("dynamic_fps.impl.DynamicFPSMod");
+                java.lang.reflect.Method method = clazz.getMethod("renderedCurrentFrame");
+                if(Minecraft.getInstance().noRender || !(boolean) method.invoke(null)) return;
+            }
+            catch (Exception ignored){}
+        }
 
         // If texture / textureView have not been created yet, create them.
         if (BeforeBlitRenderer.beforeBlitTexture == null) {

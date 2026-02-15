@@ -16,4 +16,6 @@ public class BeforeBlitRenderer {
     public static GpuTexture beforeBlitTexture;
     public static GpuTextureView beforeBlitTextureView;
     public static boolean isBeforeBlitReady = false;
+    // DynamicFPS compat.
+    public static boolean isGameRenderingCanceled = false;
 }
