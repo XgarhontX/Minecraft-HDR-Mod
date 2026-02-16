@@ -89,7 +89,7 @@ public class MixinRenderTarget {
 
         if (this.colorTexture != null) {
             if (UiBrightnessUBO == null) UiBrightnessUBO = new FloatNumberUBO("HdrUIBrightness", 2);
-            GpuBuffer gpuBuffer = UiBrightnessUBO.update(new Float[]{
+            GpuBuffer gpuBuffer = UiBrightnessUBO.update(new float[]{
                     config.uiBrightness < 0 ? GLFWColorManagement.glfwGetWindowSdrWhiteLevel(Minecraft.getInstance().getWindow().handle()) : config.uiBrightness, // For UI Brightness
                     config.customEotfEmulate < 0 ? GLFWColorManagement.glfwGetWindowSdrWhiteLevel(Minecraft.getInstance().getWindow().handle()) : config.customEotfEmulate
             });
