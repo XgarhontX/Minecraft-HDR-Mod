@@ -28,7 +28,6 @@ Use these uniforms inside `#if HDR_MOD_INSTALLED` block.
 ### Output
 the output of the shader(aka. what is written to main render target in final pass) should have **scRGB-nl encoding(Rec.709 primaries, sRGB (for negative numbers use −f(−x)) transfer function)**, and you should not use RGBA8F for scene color.
 ## Known Issue
-- Ingame screenshot is broken.
 - Xaero Map may cause black screen on startup, but recover to normal before you see title screen.
 ## Credits
 - Tom94, for [glfw fork with color management](https://github.com/Tom94/glfw/tree/color-management);
