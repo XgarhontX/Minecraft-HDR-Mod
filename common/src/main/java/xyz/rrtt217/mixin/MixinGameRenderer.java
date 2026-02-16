@@ -15,6 +15,5 @@ public class MixinGameRenderer {
     @Inject(method = "render", at = @At("RETURN"), cancellable = true)
     private void hdr_mod$setGameRendererState(CallbackInfo ci){
         BeforeBlitRenderer.isGameRenderingCanceled = ci.isCancelled();
-        HDRMod.LOGGER.info(String.valueOf(ci.isCancelled()));
     }
 }
