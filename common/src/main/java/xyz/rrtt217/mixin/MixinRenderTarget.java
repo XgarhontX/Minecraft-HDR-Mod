@@ -127,7 +127,7 @@ public class MixinRenderTarget {
     @ModifyArg(method = "blitToScreen", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/CommandEncoder;presentTexture(Lcom/mojang/blaze3d/textures/GpuTextureView;)V"), index = 0)
     private GpuTextureView hdr_mod$modifyTextureToBePresented(GpuTextureView gpuTextureView){
         HDRModConfig config = AutoConfig.getConfigHolder(HDRModConfig.class).getConfig();
-        if(config.writeBeforeBlitToMainTarget) return gpuTextureView;
+        if(config.writeBeforeBlitToMainTarget || config.forceDisableBeforeBlitPipeline) return gpuTextureView;
         return BeforeBlitRenderer.beforeBlitTextureView;
     }
     @Inject(method = "createBuffers", at = @At("HEAD"))
