@@ -15,13 +15,13 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "xyz.rrtt217.fabric.HDRModFabric"
+      "xyz.rrtt217.HDRMod.fabric.HDRModFabric"
     ],
     "client": [
-      "xyz.rrtt217.fabric.client.HDRModFabricClient"
+      "xyz.rrtt217.HDRMod.fabric.client.HDRModFabricClient"
     ],
     "modmenu":[
-      "xyz.rrtt217.fabric.client.compat.HDRModModMenuIntegration"
+      "xyz.rrtt217.HDRMod.fabric.client.compat.HDRModModMenuIntegration"
     ]
   },
   "mixins": [
