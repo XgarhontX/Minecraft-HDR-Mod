@@ -20,8 +20,7 @@ public class MixinGlDevice {
         HDRModConfig config = AutoConfig.getConfigHolder(HDRModConfig.class).getConfig();
         if(config.enableHDR && args.get(2).equals(GlConst.toGlInternalId(TextureFormat.RGBA8)) && (!config.onlyUpgradeNecessaryTexture || HDRModInjectHooks.isInjectEnabled())) {
             if(HDRModInjectHooks.isInject2Enabled() && config.useRGBA16UNORMOnLinux) {
-                args.set(2,GL30.GL_RGBA16UI);
-                args.set(6,GL30.GL_RGBA_INTEGER);
+                args.set(2,GL30.GL_RGBA16);
                 args.set(7,GL30.GL_UNSIGNED_SHORT);
             }
             else {
