@@ -96,6 +96,7 @@ public class PngjHDRScreenshot {
                         for (int c = 0; c < 4; c++) {
                             bits = mappedView.data().getShort(basePos + c * 2);
                             datas[c] = Float.float16ToFloat(bits);
+                            if (!doTransferTransform) datas[c] *= 80. / config.customGamePaperWhiteBrightness;//if scRGB path. fix Game Brightness scaling.
                         }
                         // Do transform.
                         if (doPrimariesTransform) {
