@@ -15,7 +15,7 @@ public class MixinGlCommandEncoder {
     private int modifyReadPixelFormat(int i){
         HDRModConfig config = AutoConfig.getConfigHolder(HDRModConfig.class).getConfig();
         if(HDRModInjectHooks.isInjectEnabled()){
-            if(config.useRGBA16UNORMOnLinux) return GL30.GL_UNSIGNED_SHORT;
+            if(config.useRGBA16UNORM) return GL30.GL_UNSIGNED_SHORT;
             return GL30.GL_HALF_FLOAT;
         }
         return i;

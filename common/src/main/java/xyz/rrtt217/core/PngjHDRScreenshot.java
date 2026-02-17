@@ -23,7 +23,6 @@ import xyz.rrtt217.util.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.util.Arrays;
 import java.util.function.Consumer;
 
 public class PngjHDRScreenshot {
@@ -94,7 +93,7 @@ public class PngjHDRScreenshot {
                         // Interpret data.
                         int basePos = ((y * width + x) * 4) * 2;
                         // RGBA16 UNORM.
-                        if(config.useRGBA16UNORMOnLinux) {
+                        if(config.useRGBA16UNORM) {
                             for (int c = 0; c < png.imgInfo.channels; c++) {
                                 bits = mappedView.data().getShort(basePos + c * 2);
                                 scanline[x * png.imgInfo.channels + c] = bits;
