@@ -102,7 +102,6 @@ public class PngjHDRScreenshot {
                             for (int c = 0; c < png.imgInfo.channels; c++) {
                                 bits = mappedView.data().getShort(basePos + c * 2);
                                 scanline[x * png.imgInfo.channels + c] = bits;
-                                //TODO: Game Brightness scaling for Windows?
                             }
                         }
                         else{
@@ -110,7 +109,6 @@ public class PngjHDRScreenshot {
                             for (int c = 0; c < 4; c++) {
                                 bits = mappedView.data().getShort(basePos + c * 2);
                                 datas[c] = Float.float16ToFloat(bits);
-                                if (HDRMod.WindowTransferFunction == Enums.TransferFunction.EXT_LINEAR) datas[c] *= 80.f / config.customGamePaperWhiteBrightness; //Fixes Game Brightness scaling for Windows.
                             }
                             // Do transform.
                             if (doPrimariesTransform) {
@@ -119,7 +117,7 @@ public class PngjHDRScreenshot {
                             }
                             if (doTransferTransform) {
                                 System.arraycopy(datas, 0, rgb, 0, 3);
-                                System.arraycopy(ColorTransforms.scRGBtoPQ(rgb, config.customGamePaperWhiteBrightness < 0 ? GLFWColorManagement.glfwGetWindowSdrWhiteLevel(Minecraft.getInstance().getWindow().handle()) : config.customGamePaperWhiteBrightness), 0, datas, 0, 3);
+                                System.arraycopy(ColorTransforms.scRGBtoPQ(rgb, 80.0f), 0, datas, 0, 3);
                             }
                             // Write to line.
                             for (int c = 0; c < png.imgInfo.channels; c++) {
