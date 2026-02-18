@@ -102,6 +102,7 @@ public class PngjHDRScreenshot {
                             for (int c = 0; c < png.imgInfo.channels; c++) {
                                 bits = mappedView.data().getShort(basePos + c * 2);
                                 scanline[x * png.imgInfo.channels + c] = bits;
+                                //TODO: Game Brightness scaling for Windows?
                             }
                         }
                         else{
@@ -109,6 +110,7 @@ public class PngjHDRScreenshot {
                             for (int c = 0; c < 4; c++) {
                                 bits = mappedView.data().getShort(basePos + c * 2);
                                 datas[c] = Float.float16ToFloat(bits);
+                                if (System.getProperty("os.name").startsWith("Windows")) datas[c] *= 80.f / config.customGamePaperWhiteBrightness; //Fixes Game Brightness scaling for Windows.
                             }
                             // Do transform.
                             if (doPrimariesTransform) {
