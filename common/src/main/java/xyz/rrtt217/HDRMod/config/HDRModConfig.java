@@ -13,19 +13,19 @@ public class HDRModConfig implements ConfigData {
 
     @ConfigEntry.Gui.Tooltip
     @ConfigEntry.Category("general")
-    public float uiBrightness = System.getProperty("os.name").startsWith("Windows") ? 203.f : -1.0f; //TODO: GLFW auto get fix on Windows
+    public float uiBrightness = -1.0f;
     @ConfigEntry.Gui.Tooltip
     @ConfigEntry.Category("general")
-    public float customGamePaperWhiteBrightness = System.getProperty("os.name").startsWith("Windows") ? 203.f : -1.0f; //TODO: GLFW auto get fix on Windows
+    public float customGamePaperWhiteBrightness = -1.0f;
     @ConfigEntry.Gui.Tooltip
     @ConfigEntry.Category("general")
-    public float customGamePeakBrightness = 1000.0f;  //TODO: GLFW auto get
+    public float customGamePeakBrightness = 1000.0f;  // It's broken intentionally for tev glfw, the system always reports the software limit instead of hardware.
     @ConfigEntry.Gui.Tooltip
     @ConfigEntry.Category("general")
-    public float customGameMinimumBrightness = 0.0f;
+    public float customGameMinimumBrightness = 0.0f; // Probably unused and broken.
     @ConfigEntry.Gui.Tooltip
     @ConfigEntry.Category("general")
-    public float customEotfEmulate = System.getProperty("os.name").startsWith("Windows") ? 203.f : 0.0f; //TODO: GLFW auto get fix on Windows
+    public float customEotfEmulate = System.getProperty("os.name").startsWith("Windows") ? -1.0f : 0.0f;
 
     @ConfigEntry.Gui.Tooltip
     @ConfigEntry.Category("advanced")
