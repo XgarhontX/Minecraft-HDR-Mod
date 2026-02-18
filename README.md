@@ -17,6 +17,8 @@ A minecraft mod that enables native HDR on Windows/Linux with Iris shaders. Curr
 - *Troubleshooting*: If your game crashes on NeoForge, disable `earlyWindowControl` in `<game folder>/config/fml.toml`
 - *Troubleshooting*: Clean temp file if your game doesn't start (path can be found in log, %TEMP%/glfw on Windows and /tmp/glfw on Linux).
 ## For Shader Packs
+### Wiki Tutorial
+- [For Shaderpack Devs](https://github.com/rrtt217/Minecraft-HDR-Mod/wiki/For-Shaderpack-Devs)
 ### Macros
 - `HDR_MOD_INSTALLED`
 - `HDR_ENABLED`
@@ -31,6 +33,7 @@ A minecraft mod that enables native HDR on Windows/Linux with Iris shaders. Curr
 Use these uniforms inside `#if HDR_MOD_INSTALLED` block.
 ### Output
 the output of the shader(aka. what is written to main render target in final pass) should have **scRGB-nl encoding(Rec.709 primaries, sRGB (for negative numbers use −f(−x)) transfer function)**, and you should not use RGBA8F for scene color.
+- [Wiki Section](https://github.com/rrtt217/Minecraft-HDR-Mod/wiki/For-Shaderpack-Devs#4-ui-scaling--expected-output)
 ## Known Issue
 - Xaero Map may cause black screen on startup, but recover to normal before you see title screen.
 ## Credits
