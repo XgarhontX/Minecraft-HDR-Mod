@@ -42,3 +42,6 @@ the output of the shader(aka. what is written to main render target in final pas
 - XgarhontX and some other fellows, for working on RenoDX Minecraft HDR and shader patches, and helping me to make color transform correct.
 ## Copyright
 The main HDR Mod repo is licensed under MIT. Bundled GLFW from Tom94's/mine fork is licensed under the zlib/libpng license.
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=rrtt217/Minecraft-HDR-Mod&type=date&legend=top-left)](https://www.star-history.com/#rrtt217/Minecraft-HDR-Mod&type=date&legend=top-left)
